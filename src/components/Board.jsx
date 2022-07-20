@@ -1,4 +1,5 @@
 import Button from "./Button";
+import {useEffect, useState} from "react";
 
 /**
  * This is the board what will represent the tic-toc-toe board
@@ -9,11 +10,23 @@ import Button from "./Button";
  * @constructor
  */
 export default function Board(props) {
-    let {elements} = props
-    console.log(elements)
+    let [elements, seElements] = useState(props.elements)
+
+    function setX() {
+        elements[5] = {
+            id: '90', name: "XXX", value: 0
+        }
+        // let newElements = [{
+        //     id: '1', name: "CCC", value: 0
+        // }, {
+        //     id: '2', name: "DDDD", value: 0
+        // }, {
+        //     id: '3', name: "XXX", value: 0
+        // }]
+        seElements(elements)
+    }
+
     return (<div className="board">
-        {elements.map(buttonData=>(
-            <Button buttonData = {buttonData} key = {buttonData.id}/>
-        ))}
+        {elements.map(buttonData => (<Button buttonData={buttonData} key={buttonData.id} setX={setX}/>))}
     </div>);
 }
