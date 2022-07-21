@@ -1,5 +1,3 @@
-import {useEffect, useState} from "react";
-
 /**
  * This Button component is to add button in tic-toc-toe board
  * @author Mahadi Hasan Joy
@@ -9,30 +7,8 @@ import {useEffect, useState} from "react";
  * @constructor
  */
 export default function Button(props) {
-    const [buttonData, setButtonData] = useState(props.buttonData)
-    let [boardValue, setBoardValue] = useState(props.buttonData.name)
-    useEffect(() => {
-        console.log(buttonData)
-        if (buttonData.name === "O") {
-            setBoardValue("")
-            console.log("Nai")
-
-        } else if(buttonData.name === "X"){
-            setBoardValue("X")
-            console.log("X")
-        }
-        else{
-            setBoardValue("O")
-            console.log("O")
-        }
-    },[]);
-
-    function checkData(buttonData){
-        console.log(buttonData)
-
-    }
+    let {className, value, onClick} = props
     return (<>
-        {checkData(props.buttonData)}
-        <button className="button" onClick={() => (setBoardValue("O"), props.setX())}>{boardValue}</button>
+        <button onClick={onClick}  className={`text-big ${className}`}>{value}</button>
     </>)
 }
