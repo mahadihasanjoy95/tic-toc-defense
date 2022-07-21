@@ -13,17 +13,13 @@ export default function Board(props) {
     let [elements, seElements] = useState(props.elements)
 
     function setX() {
-        elements[5] = {
-            id: '90', name: "XXX", value: 0
+        elements[0] ={
+            id: '1', name: "DDD", value: 0
         }
-        // let newElements = [{
-        //     id: '1', name: "CCC", value: 0
-        // }, {
-        //     id: '2', name: "DDDD", value: 0
-        // }, {
-        //     id: '3', name: "XXX", value: 0
-        // }]
-        seElements(elements)
+        elements[1] = {
+            id: '2', name: "X", value: 0
+        }
+        seElements([])
     }
 
     return (<div className="board">

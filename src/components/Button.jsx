@@ -12,16 +12,27 @@ export default function Button(props) {
     const [buttonData, setButtonData] = useState(props.buttonData)
     let [boardValue, setBoardValue] = useState(props.buttonData.name)
     useEffect(() => {
-        if (buttonData.name === "0") {
+        console.log(buttonData)
+        if (buttonData.name === "O") {
             setBoardValue("")
-            console.log("X")
+            console.log("Nai")
 
-        } else {
+        } else if(buttonData.name === "X"){
             setBoardValue("X")
-            console.log(buttonData.name)
+            console.log("X")
         }
-    }, []);
+        else{
+            setBoardValue("O")
+            console.log("O")
+        }
+    },[]);
+
+    function checkData(buttonData){
+        console.log(buttonData)
+
+    }
     return (<>
+        {checkData(props.buttonData)}
         <button className="button" onClick={() => (setBoardValue("O"), props.setX())}>{boardValue}</button>
     </>)
 }
