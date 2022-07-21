@@ -1,3 +1,6 @@
+import {useEffect} from "react";
+import {useState} from "react";
+
 /**
  * This CustomButton component is to add button in tic-toc-toe board
  * @author Mahadi Hasan Joy
@@ -7,7 +10,19 @@
  * @constructor
  */
 export default function CustomButton(props) {
+    const {className} = props
+    const [boardValue,setBoardValue] = useState(props.data)
+
+
+    useEffect(() => {
+        if (boardValue.name === "O") {
+            boardValue.name = ""
+        } else {
+            boardValue.name = "X"
+        }
+
+    }, []);
     return (<>
-        <button className="button">{props.name}</button>
+        <button className={`text-big ${className}`}>{boardValue.name}</button>
     </>)
 }

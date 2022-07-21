@@ -7,17 +7,14 @@
  * @constructor
  */
 import CustomButton from "./CustomButton";
+import {useEffect, useState} from "react";
 
 export default function Board(props) {
-    return (<div className="board">
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
-        <CustomButton name={"O"}/>
+    let {className} = props
+    const [data, setData] = useState(props.data)
+    return (<div className={`text-big ${className}`}>
+        {data.map(d => (
+            <CustomButton key={d.id} className="button" data={d}/>
+        ))}
     </div>);
 }
