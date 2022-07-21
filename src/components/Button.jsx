@@ -9,6 +9,8 @@
 export default function Button(props) {
     let {className, value, onClick} = props
     return (<>
-        <button onClick={onClick}  className={`text-big ${className}`}>{value}</button>
+        {value==="O"||value==="X"||value===""||value===null?
+            <button onClick={onClick}  className={`text-big ${className}`}>{value}</button>:
+            <button onClick={onClick}  className="button2">{value}</button>}
     </>)
 }

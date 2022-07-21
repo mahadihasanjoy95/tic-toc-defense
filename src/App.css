@@ -20,7 +20,14 @@
   cursor: pointer;
   outline: none
 }
-
+.button2{
+  background: hotpink;
+  border: 2px solid darkred;
+  font-size: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
