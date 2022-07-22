@@ -17,8 +17,10 @@ export default function Board(props) {
     const {winningPatterns,winningPatternsNext} = props
 
 
-
-
+    /**
+     * Checking anyone win the game or not
+     * @returns {null|any}
+     */
     const checkWinner = () =>{
         for (let i = 0; i < winningPatterns.length; i++) {
             const [a, b, c] = winningPatterns[i];
@@ -38,6 +40,9 @@ export default function Board(props) {
         }
         return null;
     }
+    /**
+     * trigger only for firstMove randomly pick one button
+     */
     const firstMoveOfPc = () => {
         let randomNumber = Math.floor(Math.random() * 9)
         if (squares[randomNumber] === null) {
@@ -48,6 +53,9 @@ export default function Board(props) {
         } else firstMoveOfPc()
     }
 
+    /**
+     * This method trigger after player choose his button
+     */
     const moveOfPc = () => {
         let flag = false
         if (a) {
@@ -74,6 +82,10 @@ export default function Board(props) {
         }
 
     }
+    /**
+     *
+     * @param i
+     */
     const handleClick = (i) => {
         if (squares[i] === null) {
             squares[i] = "O"
