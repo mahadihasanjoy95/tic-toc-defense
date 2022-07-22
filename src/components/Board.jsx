@@ -15,6 +15,7 @@ export default function Board(props) {
     const [isX, setX] = useState(true)
     const [a,setA]=useState(true)
     const {winningPatterns,winningPatternsNext} = props
+    const [tap,setTap]=useState(0)
 
 
     /**
@@ -66,7 +67,6 @@ export default function Board(props) {
         }
         for (let i = 0; i < winningPatternsNext.length; i++) {
             const [x, y, z] = winningPatternsNext[i];
-            console.log(x+":"+squares[x],y+":"+squares[y],z+":"+squares[z])
             if (squares[x] && squares[x] === "O" && squares[y]==="O" && squares[z]===null) {
                 squares[z]="X"
                 setSquares(squares)
@@ -90,7 +90,9 @@ export default function Board(props) {
         if (squares[i] === null) {
             squares[i] = "O"
             setSquares(squares)
-            if (checkWinner()===null){
+            setTap(tap+1)
+            console.log(tap)
+            if (checkWinner()===null && tap!==4){
                 moveOfPc()
             }
             setX(!isX)
