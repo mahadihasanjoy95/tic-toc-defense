@@ -15,20 +15,7 @@ export default function Board(props) {
     const [isX, setX] = useState(true)
     const [a,setA]=useState(true)
     const [winner,setWinner] = useState(null)
-    const winningPatterns =[
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-    ]
-    const winningPatternsNext =[
-        [0,1,2], [0,2,1], [0,3,6], [0,6,3], [0,8,4],[0,4,8], [1,2,0], [1,4,7], [2,5,8], [2,4,6],
-        [3,6,0], [3,4,5], [4,5,3], [4,8,0], [4,6,2], [4,7,1], [5,8,2], [6,7,8], [7,8,6],
-    ]
+    const {winningPatterns,winningPatternsNext} = props
 
 
 
@@ -75,8 +62,8 @@ export default function Board(props) {
         for (let i = 0; i < winningPatternsNext.length; i++) {
             const [x, y, z] = winningPatternsNext[i];
             console.log(x+":"+squares[x],y+":"+squares[y],z+":"+squares[z])
-            if (squares[x] && squares[x] === squares[y] && squares[z]===null) {
-                squares[x]==="O"?squares[z]="X":squares[z]="O"
+            if (squares[x] && squares[x] === "O" && squares[y]==="O" && squares[z]===null) {
+                squares[z]="X"
                 setSquares(squares)
                 flag = true
                 checkWinner()
