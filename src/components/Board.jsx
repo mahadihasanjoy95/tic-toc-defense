@@ -14,7 +14,6 @@ export default function Board(props) {
     const [squares, setSquares] = useState(Array(9).fill(null))
     const [isX, setX] = useState(true)
     const [a,setA]=useState(true)
-    const [winner,setWinner] = useState(null)
     const {winningPatterns,winningPatternsNext} = props
 
 
@@ -28,7 +27,6 @@ export default function Board(props) {
                 squares[a]==="O"?squares[a]="o":squares[a]="x"
                 squares[b]==="O"?squares[b]="o":squares[b]="x"
                 squares[c]==="O"?squares[c]="o":squares[c]="x"
-                setWinner(squares[b])
                 for (let k = 0; k < squares.length; k++) {
                     if (squares[k]===null){
                         squares[k]=""
@@ -41,7 +39,6 @@ export default function Board(props) {
         return null;
     }
     const firstMoveOfPc = () => {
-        console.log("HEREEEEE")
         let randomNumber = Math.floor(Math.random() * 9)
         if (squares[randomNumber] === null) {
             squares[randomNumber] = "X"
