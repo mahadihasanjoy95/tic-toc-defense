@@ -7,10 +7,10 @@
  * @constructor
  */
 export default function Button(props) {
-    let {className, value, onClick} = props
+    let {className1, className2, value, onClick} = props
     return (<>
         {value==="O"||value==="X"||value===""||value===null?
-            <button onClick={onClick}  className={`text-big ${className}`}>{value}</button>:
-            <button onClick={onClick}  className="button2">{value}</button>}
+            <button onClick={onClick}  className={`text-big ${className1}`}>{value}</button>:
+            <button onClick={onClick}  className={`text-big ${className2}`}>{value}</button>}
     </>)
 }

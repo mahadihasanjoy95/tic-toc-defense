@@ -14,18 +14,26 @@ export default function Board(props) {
     const [squares, setSquares] = useState(Array(9).fill(null))
     const [isX, setX] = useState(true)
     const [a,setA]=useState(true)
+    const [winner,setWinner] = useState(null)
+    const winningPatterns =[
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ]
+    const winningPatternsNext =[
+        [0,1,2], [0,2,1], [0,3,6], [0,6,3], [0,8,4],[0,4,8], [1,2,0], [1,4,7], [2,5,8], [2,4,6],
+        [3,6,0], [3,4,5], [4,5,3], [4,8,0], [4,6,2], [4,7,1], [5,8,2], [6,7,8], [7,8,6],
+    ]
+
+
+
 
     const checkWinner = () =>{
-        const winningPatterns =[
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6],
-        ]
         for (let i = 0; i < winningPatterns.length; i++) {
             const [a, b, c] = winningPatterns[i];
             if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
@@ -33,6 +41,7 @@ export default function Board(props) {
                 squares[a]==="O"?squares[a]="o":squares[a]="x"
                 squares[b]==="O"?squares[b]="o":squares[b]="x"
                 squares[c]==="O"?squares[c]="o":squares[c]="x"
+                setWinner(squares[b])
                 for (let k = 0; k < squares.length; k++) {
                     if (squares[k]===null){
                         squares[k]=""
@@ -56,19 +65,30 @@ export default function Board(props) {
     }
 
     const moveOfPc = () => {
-        // if (a) {
+        let flag = false
+        if (a) {
             firstMoveOfPc()
             setA(false)
             return
 
-        // }
-        // for (let i = 0; i < squares.length; i++) {
-        //     if (squares[i] === null) {
-        //         squares[i] = "X"
-        //         setSquares(squares)
-        //         break;
-        //     }
-        // }
+        }
+        for (let i = 0; i < winningPatternsNext.length; i++) {
+            const [x, y, z] = winningPatternsNext[i];
+            console.log(x+":"+squares[x],y+":"+squares[y],z+":"+squares[z])
+            if (squares[x] && squares[x] === squares[y] && squares[z]===null) {
+                squares[x]==="O"?squares[z]="X":squares[z]="O"
+                setSquares(squares)
+                flag = true
+                checkWinner()
+                return;
+            }
+        }
+        if (!flag){
+                firstMoveOfPc()
+                return;
+
+        }
+
     }
     const handleClick = (i) => {
         if (squares[i] === null) {
@@ -86,14 +106,14 @@ export default function Board(props) {
         }
     }
     return (<div className="board">
-        <Button className="button" value={squares[0]} onClick={() => handleClick(0)}/>
-        <Button className="button" value={squares[1]} onClick={() => handleClick(1)}/>
-        <Button className="button" value={squares[2]} onClick={() => handleClick(2)}/>
-        <Button className="button" value={squares[3]} onClick={() => handleClick(3)}/>
-        <Button className="button" value={squares[4]} onClick={() => handleClick(4)}/>
-        <Button className="button" value={squares[5]} onClick={() => handleClick(5)}/>
-        <Button className="button" value={squares[6]} onClick={() => handleClick(6)}/>
-        <Button className="button" value={squares[7]} onClick={() => handleClick(7)}/>
-        <Button className="button" value={squares[8]} onClick={() => handleClick(8)}/>
+        <Button className1="button" className2="button2" value={squares[0]} onClick={() => handleClick(0)}/>
+        <Button className1="button" className2="button2" value={squares[1]} onClick={() => handleClick(1)}/>
+        <Button className1="button" className2="button2" value={squares[2]} onClick={() => handleClick(2)}/>
+        <Button className1="button" className2="button2" value={squares[3]} onClick={() => handleClick(3)}/>
+        <Button className1="button" className2="button2" value={squares[4]} onClick={() => handleClick(4)}/>
+        <Button className1="button" className2="button2" value={squares[5]} onClick={() => handleClick(5)}/>
+        <Button className1="button" className2="button2" value={squares[6]} onClick={() => handleClick(6)}/>
+        <Button className1="button" className2="button2" value={squares[7]} onClick={() => handleClick(7)}/>
+        <Button className1="button" className2="button2" value={squares[8]} onClick={() => handleClick(8)}/>
     </div>);
 }
