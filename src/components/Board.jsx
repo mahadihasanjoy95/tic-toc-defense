@@ -13,74 +13,23 @@ export default function Board(props) {
 
     const [squares, setSquares] = useState(Array(9).fill(null))
     const [isX, setX] = useState(true)
-    const [a,setA]=useState(true)
     const {winningPatterns,winningPatternsNext} = props
-    const [tap,setTap]=useState(0)
 
 
-    /**
-     * Checking anyone win the game or not
-     * @returns {null|any}
-     */
-    const checkWinner = () =>{
-        for (let i = 0; i < winningPatterns.length; i++) {
-            const [a, b, c] = winningPatterns[i];
-            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                console.log(squares[a] + " is the winner")
-                squares[a]==="O"?squares[a]="o":squares[a]="x"
-                squares[b]==="O"?squares[b]="o":squares[b]="x"
-                squares[c]==="O"?squares[c]="o":squares[c]="x"
-                for (let k = 0; k < squares.length; k++) {
-                    if (squares[k]===null){
-                        squares[k]=""
-                        setSquares(squares)
-                    }
-                }
-                return squares[a];
-            }
-        }
-        return null;
-    }
-    /**
-     * trigger only for firstMove randomly pick one button
-     */
-    const firstMoveOfPc = () => {
-        let randomNumber = Math.floor(Math.random() * 9)
-        if (squares[randomNumber] === null) {
-            squares[randomNumber] = "X"
-            setSquares(squares)
-            setX(false)
-            checkWinner()
-        } else firstMoveOfPc()
-    }
+
 
     /**
      * This method trigger after player choose his button
      */
     const moveOfPc = () => {
-        let flag = false
-        if (a) {
-            firstMoveOfPc()
-            setA(false)
-            return
-
-        }
         for (let i = 0; i < winningPatternsNext.length; i++) {
             const [x, y, z] = winningPatternsNext[i];
-            if (squares[x] && squares[x] === "O" && squares[y]==="O" && squares[z]===null) {
-                squares[z]="X"
+            if (squares[x] && squares[x] === "0" && squares[y]==="0" && squares[z]===null) {
+                squares[z]="1"
                 setSquares(squares)
-                flag = true
-                checkWinner()
                 return;
             }
         }
-        if (!flag){
-                firstMoveOfPc()
-                return;
-
-        }
-
     }
     /**
      *
@@ -88,13 +37,9 @@ export default function Board(props) {
      */
     const handleClick = (i) => {
         if (squares[i] === null) {
-            squares[i] = "O"
+            squares[i] = "0"
             setSquares(squares)
-            setTap(tap+1)
-            console.log(tap)
-            if (checkWinner()===null && tap!==4){
-                moveOfPc()
-            }
+            moveOfPc()
             setX(!isX)
         } else if(squares[i]===""){
             alert("We got the winner, reload this page")
