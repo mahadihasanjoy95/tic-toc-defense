@@ -7,7 +7,8 @@ import {useState} from "react";
 function App() {
     const {winningPatterns, winningPatternsNext} = ButtonData
     const [squares, setSquares] = useState(Array(9).fill(null))
-    const [isX, setX] = useState(true)
+    const [start, setStart] = useState(false)
+    const [restart, setReStart] = useState(false)
 
     /**
      * This method trigger after player choose his button
@@ -31,7 +32,7 @@ function App() {
             squares[i] = "0"
             setSquares(squares)
             moveOfPc()
-            setX(!isX)
+            setStart(!start)
         } else if (squares[i] === "") {
             alert("We got the winner, reload this page")
         } else {
@@ -39,7 +40,7 @@ function App() {
         }
     }
     return (<div className="App">
-        <GameLayout winningPatterns = {winningPatterns} winningPatternsNext={winningPatternsNext} >
+        {restart?<GameLayout winningPatterns = {winningPatterns} winningPatternsNext={winningPatternsNext} >
             <Board winningPatterns={winningPatterns} winningPatternsNext={winningPatternsNext} class = "board">
                 <Button className1="button" className2="button2" value={squares[0]} onClick={() => handleClick(0)}/>
                 <Button className1="button" className2="button2" value={squares[1]} onClick={() => handleClick(1)}/>
@@ -51,7 +52,8 @@ function App() {
                 <Button className1="button" className2="button2" value={squares[7]} onClick={() => handleClick(7)}/>
                 <Button className1="button" className2="button2" value={squares[8]} onClick={() => handleClick(8)}/>
             </Board>
-        </GameLayout>
+            <Button classname1="button" value = "EXIT" onClick={()=>window.location.reload()}></Button>
+        </GameLayout>:<GameLayout><Button classname1="button" value = "START" onClick={()=>setReStart(!start)}></Button></GameLayout>}
     </div>);
 }
 
