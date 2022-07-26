@@ -51,7 +51,7 @@ function App() {
     return (<div className="App">
         <Routes>
             <Route path={"/"} element={<GameLayout winningPatterns = {winningPatterns} winningPatternsNext={winningPatternsNext} ></GameLayout>}>
-                <Route index element={<Button className1={"button"} className2="button" value={"Start"} onClick={()=>handleNavigation("start")}/>}>
+                <Route index element={<Button className1={"button"} className2="button" value={"Start"} onClick={event =>  window.location.href='/start'}/>}>
                 </Route>
                 <Route path ={"start"} element={ <Board winningPatterns={winningPatterns} winningPatternsNext={winningPatternsNext} class = "board">
                     <Button className1="button" className2="button2" value={squares[0]} onClick={() => handleClick(0)}/>
