@@ -4,7 +4,9 @@ import ButtonData from "./ButtonData";
 import Button from "./components/Button";
 import Board from "./components/Board";
 import {useState} from "react";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
+import WelcomePage from "./components/WelcomePage";
+import Error from "./components/Error";
 
 function App() {
     const {winningPatterns, winningPatternsNext} = ButtonData
@@ -41,9 +43,16 @@ function App() {
             alert("Already Select this button!!")
         }
     }
+
+    const handleNavigation = (i) =>{
+        console.log(i)
+        return (<Navigate to={"/"+i} replace={true}/>)
+    }
     return (<div className="App">
         <Routes>
             <Route path={"/"} element={<GameLayout winningPatterns = {winningPatterns} winningPatternsNext={winningPatternsNext} ></GameLayout>}>
+                <Route index element={<Button className1={"button"} className2="button" value={"Start"} onClick={()=>handleNavigation("start")}/>}>
+                </Route>
                 <Route path ={"start"} element={ <Board winningPatterns={winningPatterns} winningPatternsNext={winningPatternsNext} class = "board">
                     <Button className1="button" className2="button2" value={squares[0]} onClick={() => handleClick(0)}/>
                     <Button className1="button" className2="button2" value={squares[1]} onClick={() => handleClick(1)}/>
@@ -55,12 +64,9 @@ function App() {
                     <Button className1="button" className2="button2" value={squares[7]} onClick={() => handleClick(7)}/>
                     <Button className1="button" className2="button2" value={squares[8]} onClick={() => handleClick(8)}/>
                 </Board>}>
-
-                </Route>
-                <Route index element={<Button classname1="button" value = "Welcome To The Game" onClick={()=>setReStart(!start)}></Button>}>
-
                 </Route>
             </Route>
+            <Route path={"*"} element={<Error/>}></Route>
         </Routes>
     </div>);
 }
